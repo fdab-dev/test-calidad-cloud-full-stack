@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,8 @@ Route::get('/', function () {
 Route::get('/{vue_capture?}', function () {
     return view('index');
 })->where('/vue_capture', '[\/\w\.-]*');
+
+Route::post('/save-user', [Controller::class, 'saveUser'])->name('save-user');
+Route::post('/update-user', [Controller::class, 'updateUser'])->name('update-user');
+Route::post('/get-users', [Controller::class, 'getUsers'])->name('get-users');
+Route::post('/get-user', [Controller::class, 'getUser'])->name('get-user');

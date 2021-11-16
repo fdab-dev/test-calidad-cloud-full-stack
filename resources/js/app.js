@@ -14,6 +14,9 @@ const store = new Vuex.Store(VueStore)
 import VueRouter from 'vue-router';
 window.Vue.use(VueRouter);
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 require('./router/index');
 const router = new VueRouter({
     routes: routes,
@@ -22,6 +25,7 @@ const router = new VueRouter({
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
+Vue.component('form-user', require('./components/user/Form.vue').default);
 
 const app = new Vue({
     el: '#app',

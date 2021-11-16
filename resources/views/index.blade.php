@@ -7,7 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>    
     <title>Calidad Cloud</title>
   </head>
-    <body>
+    <body style="background: #efefef">
         <div id="app">
             <home-component></home-component>
         </div>

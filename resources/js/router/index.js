@@ -2,17 +2,22 @@ routes = [
             {
                 path: '/',
                 name: 'user-home',
-                component: require('../components/UserHome.vue').default,
+                component: require('../components/user/UserHome.vue').default,
             },
             {
-                path: '/',
+                path: '/list',
                 name: 'user-list',
-                component: require('../components/UserList.vue').default,
+                component: require('../components/user/UserList.vue').default,
             },
             {
-                path: '/',
+                path: '/new',
                 name: 'user-new',
-                component: require('../components/UserNew.vue').default,
+                component: require('../components/user/UserNew.vue').default,
+            },
+            {
+                path: '/edit/:id',
+                name: 'user-edit',
+                component: require('../components/user/UserEdit.vue').default,
             },
             {
                 path: '*',
