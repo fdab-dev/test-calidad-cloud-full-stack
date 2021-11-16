@@ -49,14 +49,20 @@ export default {
                         state.USER_FORM = data
                 },*/
                 async SET_USERS(state, data) {
-                        const response = await axios.post('/get-users?page='+data.page+'&per_page='+data.per_page);
+                        const response = await axios.get('/api/get-users?page='+data.page+'&per_page='+data.per_page);
                         state.USERS    = response.data.rows.data;
                         state.USER_PAG = response.data.pagination;
                 },
                 async SET_USER_FORM(state, data) {
-                        const response = await axios.post('/get-user?id='+data);
+                        const response = await axios.get('/api/get-user?id='+data);
                         console.log(response);
-                        state.USER_FORM = response.data.rows[0];
+                        //state.USER_FORM = response.data.rows[0];
+                        state.USER_FORM.id = response.data.rows[0].key;
+                        state.USER_FORM.name = response.data.rows[0].usuario_nombre;
+                        state.USER_FORM.email = response.data.rows[0].usuario_email;
+                        state.USER_FORM.password = response.data.rows[0].password;
+                        state.USER_FORM.birthday = response.data.rows[0].usuario_cumple;
+                        state.USER_FORM.status = response.data.rows[0].usuario_estatus;
                         state.USER_FORM.type='update';
                 },
         }

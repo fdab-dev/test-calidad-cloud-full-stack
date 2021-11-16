@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,7 +16,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function saveUser(Request $request){
+    //public function saveUser(Request $request){
+    public function saveUser(UserRequest $request){
         // guardar usuario
         $object = new User();
         $object->name     = $request->name;
@@ -28,7 +31,7 @@ class Controller extends BaseController
             $resp = 'success';
         } catch (\Exception $e) {
             $resp = 'error';
-        }
+        }     
 
         return $resp;
     }
@@ -53,6 +56,10 @@ class Controller extends BaseController
     }
 
     public function getUsers(Request $request){
+        
+        $header = $request->header('x-ccloud-auth');
+        var_dump($header);
+
         $data = User::orderBy('name', 'asc')->paginate($request['per_page']);
 
         return [
@@ -72,7 +79,7 @@ class Controller extends BaseController
         $data = User::where('id', $request->id)->get();
 
         return [
-            'rows' => $data
+            'rows' => UserResource::collection($data)
         ];
     }
 }

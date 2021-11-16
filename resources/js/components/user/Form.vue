@@ -14,7 +14,7 @@
         <label class="form-label">Email</label>
         <input type="email" class="form-control" v-model="USER_FORM.email" />
       </div>
-      <div class="col-md-6">
+      <div v-if="USER_FORM.type=='insert'" class="col-md-6">
         <label class="form-label">Password</label>
         <input
           type="password"
@@ -53,6 +53,12 @@
         </div>
       </div>
 
+      <div v-if="msg_form" class="col-12">
+        <div class="alert alert-danger" role="alert">
+            {{ msg_form_text }}
+        </div>
+      </div>
+
       <div class="col-12">
         <button type="submit" class="btn btn-secondary" :disabled="btn_status">
           <span
@@ -78,6 +84,8 @@ export default {
       spin_status: false,
       msg_success: false,
       msg_error: false,
+      msg_form: false,
+      msg_form_text: '',
     };
   },
   methods: {
@@ -88,11 +96,12 @@ export default {
       // ocultar mensajes
       this.msg_success = false;
       this.msg_error = false;
+      this.msg_form = false;
 
       if (this.USER_FORM.type == "update") {
-        var action = "../update-user";
+        var action = "../api/update-user";
       } else {
-        var action = "./save-user";
+        var action = "./api/save-user";
       }
 
       // mandar los datos al controlador
@@ -109,6 +118,17 @@ export default {
         } else {
           this.msg_error = true;
         }
+      }).catch(error => {        
+        if(error.response.data.errors != ''){
+            var msg_txt_error = '';
+            this.msg_form = true;
+            for (let object in error.response.data.errors) {
+                msg_txt_error += '* '+error.response.data.errors[object]+' ';
+            }
+            this.msg_form_text = msg_txt_error;
+        }
+
+        // Do something with error data
       });
     },
     cleanForm() {

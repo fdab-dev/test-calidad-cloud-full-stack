@@ -5915,6 +5915,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5922,7 +5928,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       btn_status: false,
       spin_status: false,
       msg_success: false,
-      msg_error: false
+      msg_error: false,
+      msg_form: false,
+      msg_form_text: ''
     };
   },
   methods: {
@@ -5935,11 +5943,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.msg_success = false;
       this.msg_error = false;
+      this.msg_form = false;
 
       if (this.USER_FORM.type == "update") {
-        var action = "../update-user";
+        var action = "../api/update-user";
       } else {
-        var action = "./save-user";
+        var action = "./api/save-user";
       } // mandar los datos al controlador
 
 
@@ -5957,6 +5966,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           _this.msg_error = true;
         }
+      })["catch"](function (error) {
+        if (error.response.data.errors != '') {
+          var msg_txt_error = '';
+          _this.msg_form = true;
+
+          for (var object in error.response.data.errors) {
+            msg_txt_error += '* ' + error.response.data.errors[object] + ' ';
+          }
+
+          _this.msg_form_text = msg_txt_error;
+        } // Do something with error data
+
       });
     },
     cleanForm: function cleanForm() {
@@ -6420,7 +6441,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post('/get-users?page=' + data.page + '&per_page=' + data.per_page);
+                return axios.get('/api/get-users?page=' + data.page + '&per_page=' + data.per_page);
 
               case 2:
                 response = _context.sent;
@@ -6443,15 +6464,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.post('/get-user?id=' + data);
+                return axios.get('/api/get-user?id=' + data);
 
               case 2:
                 response = _context2.sent;
-                console.log(response);
-                state.USER_FORM = response.data.rows[0];
+                console.log(response); //state.USER_FORM = response.data.rows[0];
+
+                state.USER_FORM.id = response.data.rows[0].key;
+                state.USER_FORM.name = response.data.rows[0].usuario_nombre;
+                state.USER_FORM.email = response.data.rows[0].usuario_email;
+                state.USER_FORM.password = response.data.rows[0].password;
+                state.USER_FORM.birthday = response.data.rows[0].usuario_cumple;
+                state.USER_FORM.status = response.data.rows[0].usuario_estatus;
                 state.USER_FORM.type = 'update';
 
-              case 6:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -43880,31 +43907,33 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("label", { staticClass: "form-label" }, [_vm._v("Password")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.USER_FORM.password,
-                expression: "USER_FORM.password",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password" },
-            domProps: { value: _vm.USER_FORM.password },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.USER_FORM, "password", $event.target.value)
-              },
-            },
-          }),
-        ]),
+        _vm.USER_FORM.type == "insert"
+          ? _c("div", { staticClass: "col-md-6" }, [
+              _c("label", { staticClass: "form-label" }, [_vm._v("Password")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.USER_FORM.password,
+                    expression: "USER_FORM.password",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { type: "password" },
+                domProps: { value: _vm.USER_FORM.password },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.USER_FORM, "password", $event.target.value)
+                  },
+                },
+              }),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
           _c("label", { staticClass: "form-label" }, [_vm._v("Birthday")]),
@@ -44005,6 +44034,20 @@ var render = function () {
                 [
                   _vm._v(
                     "\n        Hubo un problema para guardar la información, intenta más tarde.\n      "
+                  ),
+                ]
+              ),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.msg_form
+          ? _c("div", { staticClass: "col-12" }, [
+              _c(
+                "div",
+                { staticClass: "alert alert-danger", attrs: { role: "alert" } },
+                [
+                  _vm._v(
+                    "\n          " + _vm._s(_vm.msg_form_text) + "\n      "
                   ),
                 ]
               ),

@@ -23,7 +23,7 @@ Route::get('/{vue_capture?}', function () {
     return view('index');
 })->where('/vue_capture', '[\/\w\.-]*');
 
-Route::post('/save-user', [Controller::class, 'saveUser'])->name('save-user');
-Route::post('/update-user', [Controller::class, 'updateUser'])->name('update-user');
-Route::post('/get-users', [Controller::class, 'getUsers'])->name('get-users');
-Route::post('/get-user', [Controller::class, 'getUser'])->name('get-user');
+Route::post('/api/save-user', [Controller::class, 'saveUser'])->name('save-user');
+Route::post('/api/update-user', [Controller::class, 'updateUser'])->name('update-user');
+Route::get('/api/get-users', [Controller::class, 'getUsers'])->name('get-users');
+Route::get('/api/get-user', [Controller::class, 'getUser'])->name('get-user');
