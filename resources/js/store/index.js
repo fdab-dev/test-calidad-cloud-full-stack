@@ -49,12 +49,23 @@ export default {
                         state.USER_FORM = data
                 },*/
                 async SET_USERS(state, data) {
-                        const response = await axios.get('/api/get-users?page='+data.page+'&per_page='+data.per_page);
+                        const response = await axios.get('/api/get-users?page='+data.page+'&per_page='+data.per_page,
+                                {
+                                        headers: {
+                                                "x-ccloud-auth" : "prueba",
+                                                }
+                                }
+                        );
                         state.USERS    = response.data.rows.data;
                         state.USER_PAG = response.data.pagination;
                 },
                 async SET_USER_FORM(state, data) {
-                        const response = await axios.get('/api/get-user?id='+data);
+                        const response = await axios.get('/api/get-user?id='+data,
+                        {
+                                headers: {
+                                        "x-ccloud-auth" : "prueba",
+                                        }
+                        });
                         console.log(response);
                         //state.USER_FORM = response.data.rows[0];
                         state.USER_FORM.id = response.data.rows[0].key;

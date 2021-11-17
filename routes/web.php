@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\CheckHeader;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,9 @@ Route::get('/{vue_capture?}', function () {
     return view('index');
 })->where('/vue_capture', '[\/\w\.-]*');
 
-Route::post('/api/save-user', [Controller::class, 'saveUser'])->name('save-user');
-Route::post('/api/update-user', [Controller::class, 'updateUser'])->name('update-user');
-Route::get('/api/get-users', [Controller::class, 'getUsers'])->name('get-users');
-Route::get('/api/get-user', [Controller::class, 'getUser'])->name('get-user');
+Route::middleware([CheckHeader::class])->group(function () {
+    Route::post('/api/save-user', [Controller::class, 'saveUser'])->name('save-user');
+    Route::post('/api/update-user', [Controller::class, 'updateUser'])->name('update-user');
+    Route::get('/api/get-users', [Controller::class, 'getUsers'])->name('get-users');
+    Route::get('/api/get-user', [Controller::class, 'getUser'])->name('get-user');
+});

@@ -105,7 +105,12 @@ export default {
       }
 
       // mandar los datos al controlador
-      axios.post(action, this.USER_FORM).then((res) => {
+      axios.post(action, this.USER_FORM,
+                                {
+                                        headers: {
+                                                "x-ccloud-auth" : "prueba",
+                                                }
+                                }).then((res) => {
         if (this.USER_FORM.type == "insert") {
           // limpiar formulario
           this.cleanForm();

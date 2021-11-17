@@ -5952,7 +5952,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } // mandar los datos al controlador
 
 
-      axios.post(action, this.USER_FORM).then(function (res) {
+      axios.post(action, this.USER_FORM, {
+        headers: {
+          "x-ccloud-auth": "prueba"
+        }
+      }).then(function (res) {
         if (_this.USER_FORM.type == "insert") {
           // limpiar formulario
           _this.cleanForm();
@@ -6048,11 +6052,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6441,7 +6440,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/get-users?page=' + data.page + '&per_page=' + data.per_page);
+                return axios.get('/api/get-users?page=' + data.page + '&per_page=' + data.per_page, {
+                  headers: {
+                    "x-ccloud-auth": "prueba"
+                  }
+                });
 
               case 2:
                 response = _context.sent;
@@ -6464,7 +6467,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('/api/get-user?id=' + data);
+                return axios.get('/api/get-user?id=' + data, {
+                  headers: {
+                    "x-ccloud-auth": "prueba"
+                  }
+                });
 
               case 2:
                 response = _context2.sent;
@@ -10946,7 +10953,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.page-item.active .page-link[data-v-36acbe32]{\r\n  background-color: #212529;\r\n  border-color: #212529;\n}\n.page-link[data-v-36acbe32]{\r\n  color: #212529;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.page-item.active .page-link[data-v-36acbe32]{\r\n  background-color: #212529;\r\n  border-color: #212529;\n}\n.page-link[data-v-36acbe32]{\r\n  color: #212529;\n}\n.text-right[data-v-36acbe32]{\r\n  text-align: right;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44296,26 +44303,24 @@ var render = function () {
             _vm._v(" "),
             _c(
               "td",
+              { staticClass: "text-right" },
               [
                 _c(
                   "router-link",
                   {
-                    staticClass: "btn btn-success btn-sm",
+                    staticClass: "btn btn-primary btn-sm",
                     attrs: {
                       to: { name: "user-edit", params: { id: item.id } },
                       href: "#",
                     },
                   },
-                  [
-                    _c("i", { staticClass: "fa-solid fa-1" }),
-                    _vm._v("\n            Edit"),
-                  ]
+                  [_c("i", { staticClass: "fa-solid fa-pen-to-square" })]
                 ),
+                _vm._v(" "),
+                _vm._m(1, true),
               ],
               1
             ),
-            _vm._v(" "),
-            _vm._m(1, true),
           ])
         }),
         0
@@ -44340,18 +44345,14 @@ var staticRenderFns = [
       _c("th", [_vm._v("Estatus")]),
       _vm._v(" "),
       _c("th"),
-      _vm._v(" "),
-      _c("th"),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-danger btn-sm" }, [
-        _vm._v("\n            Delete\n          "),
-      ]),
+    return _c("a", { staticClass: "btn btn-danger btn-sm" }, [
+      _c("i", { staticClass: "fa-solid fa-trash-can" }),
     ])
   },
 ]

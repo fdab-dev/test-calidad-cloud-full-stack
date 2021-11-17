@@ -56,10 +56,6 @@ class Controller extends BaseController
     }
 
     public function getUsers(Request $request){
-        
-        $header = $request->header('x-ccloud-auth');
-        var_dump($header);
-
         $data = User::orderBy('name', 'asc')->paginate($request['per_page']);
 
         return [

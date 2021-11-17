@@ -43,7 +43,6 @@
         <th>Cumpleaños</th>
         <th>Estatus</th>
         <th></th>
-        <th></th>
       </tr>
       <tbody>
         <tr v-for="(item, index) in USERS" :key="index">
@@ -62,16 +61,12 @@
                 : "Eliminado"
             }}
           </td>
-          <td>
-            <router-link :to="{ name: 'user-edit', params: {id: item.id } }" class="btn btn-success btn-sm" href="#">
-              <i class="fa-solid fa-1"></i>
-              Edit</router-link>
-          </td>
-          <td>
-            <a
-              class="btn btn-danger btn-sm"
-            >
-              Delete
+          <td class="text-right">
+            <router-link :to="{ name: 'user-edit', params: {id: item.id } }" class="btn btn-primary btn-sm" href="#">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </router-link>
+            <a class="btn btn-danger btn-sm">
+              <i class="fa-solid fa-trash-can"></i>
             </a>
           </td>
         </tr>
@@ -146,5 +141,8 @@ export default {
 }
 .page-link{
   color: #212529;
+}
+.text-right{
+  text-align: right;
 }
 </style>
