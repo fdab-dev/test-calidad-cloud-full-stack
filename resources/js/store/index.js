@@ -3,7 +3,7 @@ export default {
                 USER_PAG: {
                         'page': 1,
                         'total': 0,
-                        'current_page': 0,
+                        'current_page': 1,
                         'per_page': 2,
                         'last_page': 0,
                         'from': 0,
@@ -49,7 +49,7 @@ export default {
                         state.USER_FORM = data
                 },*/
                 async SET_USERS(state, data) {
-                        const response = await axios.get('/api/get-users?page='+data.page+'&per_page='+data.per_page,
+                        const response = await axios.get('/api/get-users?page='+data.current_page+'&per_page='+data.per_page,
                                 {
                                         headers: {
                                                 "x-ccloud-auth" : "prueba",
@@ -66,7 +66,7 @@ export default {
                                         "x-ccloud-auth" : "prueba",
                                         }
                         });
-                        console.log(response);
+
                         //state.USER_FORM = response.data.rows[0];
                         state.USER_FORM.id = response.data.rows[0].key;
                         state.USER_FORM.name = response.data.rows[0].usuario_nombre;

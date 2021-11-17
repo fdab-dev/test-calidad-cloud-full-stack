@@ -29,4 +29,5 @@ Route::middleware([CheckHeader::class])->group(function () {
     Route::post('/api/update-user', [Controller::class, 'updateUser'])->name('update-user');
     Route::get('/api/get-users', [Controller::class, 'getUsers'])->name('get-users');
     Route::get('/api/get-user', [Controller::class, 'getUser'])->name('get-user');
+    Route::delete('/api/delete-user', [Controller::class, 'deleteUser'])->name('delete-user');
 });

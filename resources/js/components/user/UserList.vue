@@ -56,18 +56,18 @@
                 ? "Activo"
                 : item.status == 2
                 ? "Inactivo"
-                : item.status == 3
-                ? "Activo"
                 : "Eliminado"
             }}
           </td>
           <td class="text-right">
-            <router-link :to="{ name: 'user-edit', params: {id: item.id } }" class="btn btn-primary btn-sm" href="#">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </router-link>
-            <a class="btn btn-danger btn-sm">
-              <i class="fa-solid fa-trash-can"></i>
-            </a>
+            <div v-if="item.status!=3">
+              <router-link :to="{ name: 'user-edit', params: {id: item.id } }" class="btn btn-primary btn-sm" href="#">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </router-link>
+              <a class="btn btn-danger btn-sm" @click.prevent="confirmDel(item.id)">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -94,9 +94,16 @@ export default {
       this.pagination.page = page;
       this.GET_USER_PAG(this.pagination);
       this.GET_USERS(this.USER_PAG);
+      console.log(this.USER_PAG);
     },
+    confirmDel: function (id) {
+      this.USER_FORM.id = id;
+      console.log(this.USER_PAG);
+      $('#delete-user').modal('show');
+    }
   },
   computed: {
+    ...mapGetters(["USER_FORM"]),
     ...mapGetters(["USER_PAG"]),
     ...mapGetters(["USERS"]),
     // paginación

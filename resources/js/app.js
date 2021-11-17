@@ -20,12 +20,14 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 require('./router/index');
 const router = new VueRouter({
     routes: routes,
-    mode: 'history'
+    mode: 'history',
+    linkActiveClass: 'active'
 })
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('menu-component', require('./components/MenuComponent.vue').default);
 Vue.component('form-user', require('./components/user/Form.vue').default);
+Vue.component('user-modal', require('./components/user/UserModal.vue').default);
 
 const app = new Vue({
     el: '#app',

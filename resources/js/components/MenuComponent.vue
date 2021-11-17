@@ -5,13 +5,13 @@
         <div class="">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <router-link :to="{ name: 'user-home' }" class="nav-link" aria-current="page" href="#">Home</router-link>
+                <router-link :to="{ name: 'user-home' }" class="nav-link" href="#">Home</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="{ name: 'user-list' }" class="nav-link" aria-current="page" href="#">Listar usuarios</router-link>
+                <router-link :to="{ name: 'user-list' }" class="nav-link" href="#">Listar usuarios</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="{ name: 'user-new' }" class="nav-link" aria-current="page" href="#">Nuevo usuario</router-link>
+                <router-link :to="{ name: 'user-new' }" class="nav-link" href="#">Nuevo usuario</router-link>
             </li>
           </ul>
         </div>
@@ -29,4 +29,5 @@
 .nav-item{
     margin-right: 10px;
 }
+
 </style>

@@ -78,4 +78,20 @@ class Controller extends BaseController
             'rows' => UserResource::collection($data)
         ];
     }
+
+    public function deleteUser(Request $request){
+        // actualizar usuario
+        $object = User::find($request->id);
+        $object->status   = '3';
+        $object->deleted  = date('Y-m-d H:i:s');        
+                
+        try {
+            $object->save();
+            $resp = 'success';
+        } catch (\Exception $e) {
+            $resp = 'error';
+        }
+
+        return $resp;
+    }
 }

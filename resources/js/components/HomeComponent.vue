@@ -4,6 +4,7 @@
     <div class="main-content">
       <router-view></router-view>
     </div>
+    <user-modal></user-modal>
   </div>
 </template>
 

@@ -37,7 +37,6 @@
           <option selected value="0">Selecciona......</option>
           <option value="1">Activo</option>
           <option value="2">Inactivo</option>
-          <option value="3">Eliminado</option>
         </select>
       </div>
 

@@ -1,6 +1,6 @@
 routes = [
             {
-                path: '/',
+                path: '/home',
                 name: 'user-home',
                 component: require('../components/user/UserHome.vue').default,
             },
@@ -19,9 +19,9 @@ routes = [
                 name: 'user-edit',
                 component: require('../components/user/UserEdit.vue').default,
             },
-            {
-                path: '*',
-                name: 'page-error',
+            //{
+                //path: '*',
+                //name: 'page-error',
                 //component: require('../components/dashboard/Error.vue').default,
-            }
+           // }
         ]
