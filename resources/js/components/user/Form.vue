@@ -34,7 +34,7 @@
       <div class="col-md-6">
         <label class="form-label">Estatus</label>
         <select id="inputState" class="form-select" v-model="USER_FORM.status">
-          <option selected value="0">Selecciona......</option>
+          <option selected value="">Selecciona......</option>
           <option value="1">Activo</option>
           <option value="2">Inactivo</option>
         </select>

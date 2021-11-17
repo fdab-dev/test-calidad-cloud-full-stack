@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'birthday' => 'required',
+            'birthday' => 'required|date',
             'status' => 'required|max:3|min:1',
         ];
     }
@@ -36,7 +36,8 @@ class UserRequest extends FormRequest
         return [
             'name.required' => 'El :attribute es obligatorio.',
             'email.required' => 'El :attribute es obligatorio y debe ser único.',
-            'birthday.required' => 'El :attribute es obligatorio.',
+            'birthday.required' => 'La :attribute es obligatoria.',
+            'birthday.date' => 'La :attribute debe tener un formato válido de fecha.',
             'status.required' => 'El :attribute es obligatorio.',
         ];
     }

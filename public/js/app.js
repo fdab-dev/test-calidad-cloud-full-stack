@@ -44146,7 +44146,7 @@ var render = function () {
               },
             },
             [
-              _c("option", { attrs: { selected: "", value: "0" } }, [
+              _c("option", { attrs: { selected: "", value: "" } }, [
                 _vm._v("Selecciona......"),
               ]),
               _vm._v(" "),
