@@ -46,25 +46,25 @@
       </tr>
       <tbody>
         <tr v-for="(item, index) in USERS" :key="index">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.birthday }}</td>
+          <td>{{ item.key }}</td>
+          <td>{{ item.usuario_nombre }}</td>
+          <td>{{ item.usuario_email }}</td>
+          <td>{{ item.usuario_cumple }}</td>
           <td>
             {{
-              item.status == 1
+              item.usuario_estatus == 1
                 ? "Activo"
-                : item.status == 2
+                : item.usuario_estatus == 2
                 ? "Inactivo"
                 : "Eliminado"
             }}
           </td>
           <td class="text-right">
-            <div v-if="item.status!=3">
-              <router-link :to="{ name: 'user-edit', params: {id: item.id } }" class="btn btn-primary btn-sm" href="#">
+            <div v-if="item.usuario_estatus!=3">
+              <router-link :to="{ name: 'user-edit', params: {id: item.key } }" class="btn btn-primary btn-sm" href="#">
                 <i class="fa-solid fa-pen-to-square"></i>
               </router-link>
-              <a class="btn btn-danger btn-sm" @click.prevent="confirmDel(item.id)">
+              <a class="btn btn-danger btn-sm" @click.prevent="confirmDel(item.key)">
                 <i class="fa-solid fa-trash-can"></i>
               </a>
             </div>
@@ -94,11 +94,9 @@ export default {
       this.pagination.page = page;
       this.GET_USER_PAG(this.pagination);
       this.GET_USERS(this.USER_PAG);
-      console.log(this.USER_PAG);
     },
     confirmDel: function (id) {
       this.USER_FORM.id = id;
-      console.log(this.USER_PAG);
       $('#delete-user').modal('show');
     }
   },

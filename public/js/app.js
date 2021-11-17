@@ -5938,8 +5938,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       // habilitar elementos
-      this.spin_contact = true;
-      this.btn_contact = true; // ocultar mensajes
+      this.spin_status = true;
+      this.btn_status = true; // ocultar mensajes
 
       this.msg_success = false;
       this.msg_error = false;
@@ -5962,8 +5962,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this.cleanForm();
         }
 
-        _this.spin_contact = false;
-        _this.btn_contact = false;
+        _this.spin_status = false;
+        _this.btn_status = false;
 
         if (res.data === "success") {
           _this.msg_success = true;
@@ -5980,6 +5980,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           _this.msg_form_text = msg_txt_error;
+          _this.spin_status = false;
+          _this.btn_status = false;
         } // Do something with error data
 
       });
@@ -6144,11 +6146,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.pagination.page = page;
       this.GET_USER_PAG(this.pagination);
       this.GET_USERS(this.USER_PAG);
-      console.log(this.USER_PAG);
     },
     confirmDel: function confirmDel(id) {
       this.USER_FORM.id = id;
-      console.log(this.USER_PAG);
       $('#delete-user').modal('show');
     }
   }),
@@ -6457,7 +6457,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       'page': 1,
       'total': 0,
       'current_page': 1,
-      'per_page': 2,
+      'per_page': 10,
       'last_page': 0,
       'from': 0,
       'to': 0
@@ -6530,7 +6530,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                state.USERS = response.data.rows.data;
+                state.USERS = response.data.rows;
                 state.USER_PAG = response.data.pagination;
 
               case 5:
@@ -44418,21 +44418,21 @@ var render = function () {
         "tbody",
         _vm._l(_vm.USERS, function (item, index) {
           return _c("tr", { key: index }, [
-            _c("td", [_vm._v(_vm._s(item.id))]),
+            _c("td", [_vm._v(_vm._s(item.key))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(item.name))]),
+            _c("td", [_vm._v(_vm._s(item.usuario_nombre))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(item.email))]),
+            _c("td", [_vm._v(_vm._s(item.usuario_email))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(item.birthday))]),
+            _c("td", [_vm._v(_vm._s(item.usuario_cumple))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
                 "\n          " +
                   _vm._s(
-                    item.status == 1
+                    item.usuario_estatus == 1
                       ? "Activo"
-                      : item.status == 2
+                      : item.usuario_estatus == 2
                       ? "Inactivo"
                       : "Eliminado"
                   ) +
@@ -44441,7 +44441,7 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "text-right" }, [
-              item.status != 3
+              item.usuario_estatus != 3
                 ? _c(
                     "div",
                     [
@@ -44450,7 +44450,7 @@ var render = function () {
                         {
                           staticClass: "btn btn-primary btn-sm",
                           attrs: {
-                            to: { name: "user-edit", params: { id: item.id } },
+                            to: { name: "user-edit", params: { id: item.key } },
                             href: "#",
                           },
                         },
@@ -44464,7 +44464,7 @@ var render = function () {
                           on: {
                             click: function ($event) {
                               $event.preventDefault()
-                              return _vm.confirmDel(item.id)
+                              return _vm.confirmDel(item.key)
                             },
                           },
                         },

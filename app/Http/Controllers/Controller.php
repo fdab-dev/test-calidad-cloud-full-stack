@@ -36,12 +36,11 @@ class Controller extends BaseController
         return $resp;
     }
 
-    public function updateUser(Request $request){
+    public function updateUser(UserRequest $request){
         // actualizar usuario
         $object = User::find($request->id);
         $object->name     = $request->name;
         $object->email    = $request->email;
-        $object->password = Hash::make($request->password);
         $object->birthday = $request->birthday;
         $object->status   = $request->status;
                 
@@ -67,7 +66,7 @@ class Controller extends BaseController
                 'from'         => $data->firstItem(),
                 'to'           => $data->lastPage()
             ],  
-            'rows' => $data
+            'rows' => UserResource::collection($data)
         ];
     }
 

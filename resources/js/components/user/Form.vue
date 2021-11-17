@@ -90,8 +90,8 @@ export default {
   methods: {
     submitFormContact() {
       // habilitar elementos
-      this.spin_contact = true;
-      this.btn_contact = true;
+      this.spin_status = true;
+      this.btn_status = true;
       // ocultar mensajes
       this.msg_success = false;
       this.msg_error = false;
@@ -114,8 +114,8 @@ export default {
           // limpiar formulario
           this.cleanForm();
         }
-        this.spin_contact = false;
-        this.btn_contact = false;
+        this.spin_status = false;
+        this.btn_status = false;
 
         if (res.data === "success") {
           this.msg_success = true;
@@ -130,6 +130,8 @@ export default {
                 msg_txt_error += '* '+error.response.data.errors[object]+' ';
             }
             this.msg_form_text = msg_txt_error;
+            this.spin_status = false;
+            this.btn_status = false;
         }
 
         // Do something with error data

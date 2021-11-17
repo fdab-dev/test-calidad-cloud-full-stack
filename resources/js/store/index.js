@@ -4,7 +4,7 @@ export default {
                         'page': 1,
                         'total': 0,
                         'current_page': 1,
-                        'per_page': 2,
+                        'per_page': 10,
                         'last_page': 0,
                         'from': 0,
                         'to': 0
@@ -56,7 +56,7 @@ export default {
                                                 }
                                 }
                         );
-                        state.USERS    = response.data.rows.data;
+                        state.USERS    = response.data.rows;
                         state.USER_PAG = response.data.pagination;
                 },
                 async SET_USER_FORM(state, data) {
